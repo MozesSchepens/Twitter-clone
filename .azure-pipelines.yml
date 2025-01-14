@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  phpVersion: '8.4'
+  dockerImage: 'twitter-clone:latest'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: sdk
+      version: '6.x'
+
+  - task: UsePHP@1
+    inputs:
+      version: $(phpVersion)
+
+  - script: composer install --no-interaction --prefer-dist
+    displayName: 'Install dependencies'
+
+  - script: php artisan test
+    displayName: 'Run unit tests'
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: '<containerRegistryServiceConnection>'
+      repository: '<your-docker-repo/twitter-clone>'
+      command: 'buildAndPush'
+      dockerfile: 'Dockerfile'
+      tags: '$(dockerImage)'

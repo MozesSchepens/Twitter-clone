@@ -4,8 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('posts.index');
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,7 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Voeg deze route toe
 Route::get('/posts', function () {
     return view('posts.index');
 })->name('posts.index');

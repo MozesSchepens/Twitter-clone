@@ -21,23 +21,11 @@
         <button type="submit">Post</button>
     </form>
 
-    <hr>
-
-    <h2>Alle Posts:</h2>
-    @foreach ($posts as $post)
-        <div>
-            <h3>{{ $post->title }}</h3>
-            <p>{{ $post->content }}</p>
-            <small>Geplaatst op: {{ $post->created_at->format('d-m-Y H:i') }}</small>
-            <hr>
-
-            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze post wilt verwijderen?')">
-            @csrf
-            @method('DELETE')
-
-            <button type="submit" class="btn btn-danger">Verwijder</button>
-        </form>
-        </div>
-    @endforeach
+    <h2>Posts</h2>
+    <ul>
+        @foreach($posts as $post)
+            <li>{{ $post->title }}: {{ $post->content }}</li>
+        @endforeach
+    </ul>
 </body>
 </html>

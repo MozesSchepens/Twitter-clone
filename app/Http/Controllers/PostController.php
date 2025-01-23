@@ -9,30 +9,19 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::all();
         return view('posts.index', compact('posts'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
 
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
+        Post::create($validated);
 
-        return redirect()->route('posts.index');
-    }
-
-    public function destroy($id)
-    {
-        $post = Post::findOrFail($id);
-        $post->delete();
-
-        return redirect()->route('posts.index')->with('success', 'Post succesvol verwijderd.');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 }

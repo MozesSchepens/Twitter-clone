@@ -1,24 +1,21 @@
-# Gebruik de officiële PHP 8 image met Apache
-FROM php:8.1-apache
+FROM php:8.2-fpm
 
-# Installeer vereiste PHP-extensies
-RUN docker-php-ext-install pdo pdo_mysql
+WORKDIR /var/www
 
-# Zorg ervoor dat Composer geïnstalleerd wordt
+# Installeer benodigde extensies
+RUN apt-get update && apt-get install -y \
+    libpng-dev libjpeg-dev libfreetype6-dev zip unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql opcache
+
+# Installeer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Kopieer alle bestanden van het project naar de container
-COPY . /var/www/html
+# Kopieer projectbestanden
+COPY . /var/www
 
-# Stel de werkdirectory in
-WORKDIR /var/www/html
+# Rechten instellen
+RUN chown -R www-data:www-data /var/www
 
-# Zorg ervoor dat de juiste rechten zijn ingesteld
-RUN chown -R www-data:www-data /var/www/html \
-    && a2enmod rewrite
-
-# Exposeer poort 80
-EXPOSE 80
-
-# Start de Apache-server
-CMD ["apache2-foreground"]
+EXPOSE 9000
+CMD ["php-fpm"]

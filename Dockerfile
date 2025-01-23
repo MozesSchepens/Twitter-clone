@@ -4,7 +4,7 @@ WORKDIR /var/www
 
 # Installeer benodigde extensies
 RUN apt-get update && apt-get install -y \
-    libpng-dev libjpeg-dev libfreetype6-dev zip unzip \
+    libpng-dev libjpeg-dev libfreetype6-dev zip unzip libmariadb-dev git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql opcache
 

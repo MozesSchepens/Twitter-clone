@@ -22,7 +22,13 @@ Plan of development:
 --> Launching our docker through VS-Code in the VM. (Mozes)
 --> Setup yaml file via GitHub Actions, but still need to verify Educational License. (Seth)
 --> Project searches for sqlite-connection while we use MySQL, So we tried a docker-reset in VS-Code. (Mozes)
---> Project still searches for an sqlite-connection. So we changed to sqlite connection. (Mozes)
+--> Project still searches for an sqlite-connection. Edited docker-compose to make it search for MySQL-connection. (Mozes)
+--> ChatGPT AND Github Actions went down.
+--> Found some mistakes in our database credentials, wich made our database unable to load in docker. Solved this problem. (Mozes)
+--> Now, the docker and VM part should be functioning. Github actions is still down. Waiting...
+--> error message: "This page isn't working right now" displayed when trying to reach website.
+--> Tried using nginx default.conf to deploy our site. Doesn't work. (Mozes)
+--> Implementing account creation in Laravel. (Seth)
 
 
 
@@ -35,3 +41,12 @@ DB_PORT=3306
 DB_DATABASE=twitter-clone
 DB_USERNAME=root
 DB_PASSWORD=''
+
+Requirements to run app:
+
+--> Docker needs to be installed
+
+Sources:
+
+--> Made with help of ChatGPT
+--> yaml-file inspired by https://juliocasal.com/blog/Building-A-CICD-Pipeline-With-GitHub-Actions

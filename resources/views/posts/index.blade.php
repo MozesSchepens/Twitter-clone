@@ -30,6 +30,13 @@
             <p>{{ $post->content }}</p>
             <small>Geplaatst op: {{ $post->created_at->format('d-m-Y H:i') }}</small>
             <hr>
+
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze post wilt verwijderen?')">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">Verwijder</button>
+        </form>
         </div>
     @endforeach
 </body>

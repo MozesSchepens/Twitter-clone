@@ -28,7 +28,7 @@ Plan of development:
 --> Now, the docker and VM part should be functioning. Github actions is still down. Waiting...
 --> error message: "This page isn't working right now" displayed when trying to reach website.
 --> Tried using nginx default.conf to deploy our site. Doesn't work. (Mozes)
---> Implementing account creation in Laravel. Didn't succeed.(Seth)
+--> Implementing account creation in Laravel. Didn't succeed. (Seth)
 --> Final troubleshooting --> Site runs online!
 --> Github actions works --> yaml doesn't work as expected
 --> Created GitHub secrets so my GitHub Actions can acces the project. (Seth)

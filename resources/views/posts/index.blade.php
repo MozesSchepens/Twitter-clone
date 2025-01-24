@@ -22,7 +22,7 @@
         <button type="submit">Post</button>
     </form>
 
-    <h2>Posts</h2>
+    <h2>Ik ben Seth</h2>
     <ul>
         @foreach($posts as $post)
             <li>{{ $post->title }}: {{ $post->content }}</li>
